@@ -1,7 +1,25 @@
+-- DROP SCHOOLY TABLES FROM DEPENDENT TO NON-DEPENDENT
+-- DROP TABLE  TESA_JB_PAYMENT_SCHOOLY;
+-- DROP TABLE  TESA_JB_FEE_SCHOOLY;
+-- DROP TABLE  TESA_JB_SUBMISSION_SCHOOLY;
+-- DROP TABLE  TESA_JB_MATERIAL_SCHOOLY;
+-- DROP TABLE  TESA_JB_SCORES_SCHOOLY;
+-- DROP TABLE  TESA_JB_ASSIGNMENT_SCHOOLY;
+-- DROP TABLE  TESA_JB_STUDENT_SCHOOLY;
+-- DROP TABLE  TESA_JB_COURSE_SCHOOLY;
+-- DROP TABLE  TESA_JB_ROOM_SCHOOLY;
+-- DROP TABLE  TESA_JB_UNIVERSITY_SCHOOLY;
+
+
+
+
 
 -- 1. University Table
+CREATE SEQUENCE dbo.universityIdSeq
+    START WITH 1
+    INCREMENT BY 1;
 CREATE TABLE TESA_JB_UNIVERSITY_SCHOOLY (
-    universityId INT IDENTITY(1,1) PRIMARY KEY,
+    universityId INT PRIMARY KEY DEFAULT NEXT VALUE FOR dbo.universityIdSeq,
     universityName VARCHAR(255),
     universityStatus VARCHAR(50),
     universityCreatedAt DATETIME,
@@ -9,9 +27,12 @@ CREATE TABLE TESA_JB_UNIVERSITY_SCHOOLY (
 );
 -- DROP TABLE  TESA_JB_UNIVERSITY_SCHOOLY;
 
--- 7. Room Table
+-- 2. Room Table
+CREATE SEQUENCE dbo.roomIdSeq
+    START WITH 1
+    INCREMENT BY 1;
 CREATE TABLE TESA_JB_ROOM_SCHOOLY (
-    roomId INT IDENTITY(1,1) PRIMARY KEY,
+    roomId INT PRIMARY KEY DEFAULT NEXT VALUE FOR dbo.roomIdSeq,
     roomRoomNumber VARCHAR(50),
     roomRoomHostel VARCHAR(255),
     roomRoomUniversityId INT,
@@ -23,9 +44,12 @@ CREATE TABLE TESA_JB_ROOM_SCHOOLY (
 );
 -- DROP TABLE  TESA_JB_ROOM_SCHOOLY;
 
--- 4. Course Table
+-- 3. Course Table
+CREATE SEQUENCE dbo.courseIdSeq
+    START WITH 1
+    INCREMENT BY 1;
 CREATE TABLE TESA_JB_COURSE_SCHOOLY (
-    courseId INT IDENTITY(1,1) PRIMARY KEY,
+    courseId INT PRIMARY KEY DEFAULT NEXT VALUE FOR dbo.courseIdSeq,
     courseUniversityId INT,
     courseName VARCHAR(255),
     courseCourseCode VARCHAR(50),
@@ -37,9 +61,12 @@ CREATE TABLE TESA_JB_COURSE_SCHOOLY (
 -- DROP TABLE  TESA_JB_COURSE_SCHOOLY;
 
 
--- 2. Student Table
+-- 4. Student Table
+CREATE SEQUENCE dbo.studentIdSeq
+    START WITH 1
+    INCREMENT BY 1;
 CREATE TABLE TESA_JB_STUDENT_SCHOOLY (
-    studentId INT IDENTITY(1,1) PRIMARY KEY,
+    studentId INT PRIMARY KEY DEFAULT NEXT VALUE FOR dbo.studentIdSeq,
     studentName VARCHAR(255),
     studentAge INT,
     studentMatricNo VARCHAR(50),
@@ -53,9 +80,12 @@ CREATE TABLE TESA_JB_STUDENT_SCHOOLY (
 );
 -- DROP TABLE  TESA_JB_STUDENT_SCHOOLY;
 
--- 10. Assignment Table
+-- 5. Assignment Table
+CREATE SEQUENCE dbo.assignmentIdSeq
+    START WITH 1
+    INCREMENT BY 1;
 CREATE TABLE TESA_JB_ASSIGNMENT_SCHOOLY (
-    assignmentId INT IDENTITY(1,1) PRIMARY KEY,
+    assignmentId INT PRIMARY KEY DEFAULT NEXT VALUE FOR dbo.assignmentIdSeq,
     assignmentName VARCHAR(255),
     assignmentTopic VARCHAR(255),
     assignmentSubject VARCHAR(255),
@@ -67,9 +97,12 @@ CREATE TABLE TESA_JB_ASSIGNMENT_SCHOOLY (
 );
 -- DROP TABLE  TESA_JB_ASSIGNMENT_SCHOOLY;
 
--- 3. Scores Table
+-- 6. Scores Table
+CREATE SEQUENCE dbo.scoresIdSeq
+    START WITH 1
+    INCREMENT BY 1;
 CREATE TABLE TESA_JB_SCORES_SCHOOLY (
-    scoresId INT IDENTITY(1,1) PRIMARY KEY,
+    scoresId INT PRIMARY KEY DEFAULT NEXT VALUE FOR dbo.scoresIdSeq,
     scoresStudentId INT,
     scoresCourseId INT,
     scoresScore INT,
@@ -83,9 +116,12 @@ CREATE TABLE TESA_JB_SCORES_SCHOOLY (
 );
 -- DROP TABLE  TESA_JB_SCORES_SCHOOLY;
 
--- 5. Material Table
+-- 7. Material Table
+CREATE SEQUENCE dbo.materialIdSeq
+    START WITH 1
+    INCREMENT BY 1;
 CREATE TABLE TESA_JB_MATERIAL_SCHOOLY (
-    materialId INT IDENTITY(1,1) PRIMARY KEY,
+    materialId INT PRIMARY KEY DEFAULT NEXT VALUE FOR dbo.materialIdSeq,
     materialCourseId INT,
     materialMaterialType VARCHAR(100),
     materialMaterialName VARCHAR(255),
@@ -96,9 +132,12 @@ CREATE TABLE TESA_JB_MATERIAL_SCHOOLY (
 );
 -- DROP TABLE  TESA_JB_MATERIAL_SCHOOLY;
 
--- 6. Submission Table
+-- 8. Submission Table
+CREATE SEQUENCE dbo.submissionIdSeq
+    START WITH 1
+    INCREMENT BY 1;
 CREATE TABLE TESA_JB_SUBMISSION_SCHOOLY (
-    submissionId INT IDENTITY(1,1) PRIMARY KEY,
+    submissionId INT PRIMARY KEY DEFAULT NEXT VALUE FOR dbo.submissionIdSeq,
     submissionStudentId INT,
     submissionAssignmentId INT,
     submissionStatus VARCHAR(50),
@@ -110,9 +149,12 @@ CREATE TABLE TESA_JB_SUBMISSION_SCHOOLY (
 -- DROP TABLE  TESA_JB_SUBMISSION_SCHOOLY;
 
 
--- 8. Fee Table
+-- 9. Fee Table
+CREATE SEQUENCE dbo.feeIdSeq
+    START WITH 1
+    INCREMENT BY 1;
 CREATE TABLE TESA_JB_FEE_SCHOOLY (
-    feeId INT IDENTITY(1,1) PRIMARY KEY,
+    feeId INT PRIMARY KEY DEFAULT NEXT VALUE FOR dbo.feeIdSeq,
     feeDescription VARCHAR(255),
     feeStudentId INT,
     feeAmount DECIMAL(10,2),
@@ -125,9 +167,12 @@ CREATE TABLE TESA_JB_FEE_SCHOOLY (
 );
 -- DROP TABLE  TESA_JB_FEE_SCHOOLY;
 
--- 9. Payment Table
+-- 10. Payment Table
+CREATE SEQUENCE dbo.paymentIdSeq
+    START WITH 1
+    INCREMENT BY 1;
 CREATE TABLE TESA_JB_PAYMENT_SCHOOLY (
-    paymentId INT IDENTITY(1,1) PRIMARY KEY,
+    paymentId INT PRIMARY KEY DEFAULT NEXT VALUE FOR dbo.paymentIdSeq,
     paymentDescription VARCHAR(255),
     paymentFeeId INT,
     paymentAmount DECIMAL(10,2),
@@ -139,9 +184,14 @@ CREATE TABLE TESA_JB_PAYMENT_SCHOOLY (
 -- DROP TABLE  TESA_JB_PAYMENT_SCHOOLY;
 
 
+
+
+
+
+
 -- POPULATE MODELS
 
--- POPULATE UNIVERSITIES
+-- POPULATE UNIVERSITIES !!!
 INSERT INTO TESA_JB_UNIVERSITY_SCHOOLY (universityName, universityStatus, universityCreatedAt, universityUpdatedAt) VALUES
 ('Obafemi Awolowo University', 'session', GETDATE(), GETDATE()),
 ('University of Ibadan', 'break', GETDATE(), GETDATE()),
@@ -157,7 +207,9 @@ SELECT * FROM TESA_JB_UNIVERSITY_SCHOOLY;
 -- DELETE FROM TESA_JB_UNIVERSITY_SCHOOLY WHERE universityId IN (6,7,8,9,10);
 
 
--- POPULATE ROOMS
+
+
+-- POPULATE ROOMS !!!
 INSERT INTO TESA_JB_ROOM_SCHOOLY (roomRoomNumber, roomRoomHostel, roomRoomUniversityId, roomRoomCapacity, roomStatus, roomCreatedAt, roomUpdatedAt) VALUES
 ('1', 'a', 1, 2, 'full', GETDATE(), GETDATE()),
 ('2', 'b', 2, 6, 'full', GETDATE(), GETDATE()),
@@ -174,7 +226,63 @@ INSERT INTO TESA_JB_ROOM_SCHOOLY (roomRoomNumber, roomRoomHostel, roomRoomUniver
 SELECT * FROM TESA_JB_ROOM_SCHOOLY;
 -- DELETE FROM TESA_JB_ROOM_SCHOOLY WHERE roomId IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25);
 -- SELECT * FROM TESA_JB_ROOM_SCHOOLY FULL JOIN TESA_JB_UNIVERSITY_SCHOOLY ON TESA_JB_ROOM_SCHOOLY.roomRoomUniversityId = TESA_JB_UNIVERSITY_SCHOOLY.universityId;
---
 
 
 
+
+-- POPULATE COURSE
+INSERT INTO TESA_JB_COURSE_SCHOOLY(courseUniversityId, courseName, courseCourseCode, courseStatus, courseCreatedAt, courseUpdatedAt)
+VALUES
+(1, 'Physics', 'phy100', 'active', GETDATE(), GETDATE() ),
+(2, 'Chemistry', 'che400', 'inactive', GETDATE(), GETDATE() ),
+(3, 'Biology', 'bio300', 'active', GETDATE(), GETDATE() ),
+(4, 'English', 'eng400', 'inactive', GETDATE(), GETDATE() ),
+(5, 'Mathematics', 'mat500', 'active', GETDATE(), GETDATE() ),
+(1, 'Marketing', 'mar600', 'active', GETDATE(), GETDATE() ),
+(2, 'Economics', 'eco700', 'active', GETDATE(), GETDATE() ),
+(3, 'Agric', 'agr800', 'active', GETDATE(), GETDATE() ),
+(4, 'Computer', 'com900', 'inactive', GETDATE(), GETDATE() ),
+(2, 'Spanish', 'spa100', 'active', GETDATE(), GETDATE() ),
+(1, 'Yoruba', 'yor200', 'active', GETDATE(), GETDATE() );
+
+SELECT * FROM TESA_JB_COURSE_SCHOOLY;
+
+
+
+
+
+-- POPULATE STUDENTS !!!
+INSERT INTO TESA_JB_STUDENT_SCHOOLY (studentName, studentAge, studentMatricNo, studentRoomId, studentUniversityId, studentStatus, studentCreatedAt, studentUpdatedAt)
+VALUES
+('Ade', 15, '1', 1, 1, 'active', GETDATE(), GETDATE()),
+('Bolu', 100, '2', 2, 1, 'active', GETDATE(), GETDATE()),
+('Chidi', 28, '3', 3, 1, 'inactive', GETDATE(), GETDATE()),
+('Dare', 45, '4', 4, 1, 'active', GETDATE(), GETDATE()),
+('Ebaboy', 20, '5', 5, 1, 'inactive', GETDATE(), GETDATE()),
+('Fufugirl', 23, '6', 6, 1, 'active', GETDATE(), GETDATE()),
+('Grace', 19, '7', 3, 1, 'active', GETDATE(), GETDATE()),
+('Helena', 12, '8', 1, 1, 'inactive', GETDATE(), GETDATE()),
+('Indiana', 30, '9', 1, 1, 'active', GETDATE(), GETDATE()),
+('Justobey', 50, '10', 2, 1, 'active', GETDATE(), GETDATE());
+
+SELECT * FROM TESA_JB_STUDENT_SCHOOLY;
+
+
+-- SKIP 5 ASSIGNMENT
+
+
+
+INSERT INTO TESA_JB_SCORES_SCHOOLY (scoresStudentId, scoresCourseId, scoresScore, scoresType, scoresMaxScore, scoresStatus, scoresCreatedAt, scoresUpdatedAt)
+VALUES
+(1, 1, 100, 'ca', 100, 'active', GETDATE(), GETDATE()),
+(2, 1, 70, 'ca', 100, 'active', GETDATE(), GETDATE()),
+(3, 2, 80, 'ca', 100, 'active', GETDATE(), GETDATE()),
+(4, 2, 50, 'ca', 100, 'inactive', GETDATE(), GETDATE()),
+(5, 3, 22, 'ca', 100, 'active', GETDATE(), GETDATE()),
+(1, 3, 90, 'ca', 100, 'active', GETDATE(), GETDATE()),
+(1, 1, 10, 'ca', 100, 'active', GETDATE(), GETDATE()),
+(2, 1, 100, 'ca', 100, 'active', GETDATE(), GETDATE()),
+(2, 2, 77, 'ca', 100, 'inactive', GETDATE(), GETDATE()),
+(3, 4, 35, 'ca', 100, 'active', GETDATE(), GETDATE());
+
+SELECT * FROM TESA_JB_SCORES_SCHOOLY;
