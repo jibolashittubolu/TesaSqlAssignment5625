@@ -10,10 +10,6 @@
 -- DROP TABLE  TESA_JB_ROOM_SCHOOLY;
 -- DROP TABLE  TESA_JB_UNIVERSITY_SCHOOLY;
 
-
-
-
-
 -- 1. University Table
 CREATE SEQUENCE dbo.universityIdSeq
     START WITH 1
@@ -286,3 +282,132 @@ VALUES
 (3, 4, 35, 'ca', 100, 'active', GETDATE(), GETDATE());
 
 SELECT * FROM TESA_JB_SCORES_SCHOOLY;
+
+
+
+
+-- SOLUTION FOR QUESTION 1
+-- Get all students in a room.
+SELECT
+    r.roomId,
+    r.roomRoomNumber,
+    s.studentId,
+    s.studentName,
+    s.studentMatricNo
+FROM
+    TESA_JB_ROOM_SCHOOLY r
+JOIN
+    TESA_JB_STUDENT_SCHOOLY s ON r.roomId = s.studentRoomId
+ORDER BY
+    r.roomId;
+
+
+
+-- SOLUTION FOR QUESTION 2
+-- Get university with the most rooms (count of each room in university)
+SELECT TOP 1
+    u.universityId,
+    u.universityName,
+    COUNT(r.roomId) AS roomCount
+FROM
+    TESA_JB_UNIVERSITY_SCHOOLY u
+JOIN
+    TESA_JB_ROOM_SCHOOLY r ON u.universityId = r.roomRoomUniversityId
+GROUP BY
+    u.universityId, u.universityName
+ORDER BY
+    roomCount DESC;
+
+
+
+
+-- SOLUTION FOR QUESTION 3
+-- Get all students doing a course
+SELECT
+    c.courseId,
+    c.courseName,
+    s.studentId,
+    s.studentName,
+    s.studentMatricNo
+FROM
+    TESA_JB_COURSE_SCHOOLY c
+JOIN
+    TESA_JB_SCORES_SCHOOLY sc ON c.courseId = sc.scoresCourseId
+JOIN
+    TESA_JB_STUDENT_SCHOOLY s ON s.studentId = sc.scoresStudentId
+ORDER BY
+    c.courseId;
+
+
+
+
+-- SOLUTION FOR QUESTION 4
+-- Get count of students doing each course
+SELECT
+    c.courseId,
+    c.courseName,
+    COUNT(DISTINCT sc.scoresStudentId) AS studentCount
+FROM
+    TESA_JB_COURSE_SCHOOLY AS c
+LEFT JOIN
+    TESA_JB_SCORES_SCHOOLY AS sc ON c.courseId = sc.scoresCourseId
+GROUP BY
+    c.courseId, c.courseName
+ORDER BY
+    studentCount DESC;
+
+
+
+
+-- SOLUTION FOR QUESTION 5
+-- Get the course with the least amount of students
+SELECT TOP 1
+    c.courseId,
+    c.courseName,
+    COUNT(DISTINCT sc.scoresStudentId) AS studentCount
+FROM
+    TESA_JB_COURSE_SCHOOLY c
+LEFT JOIN
+    TESA_JB_SCORES_SCHOOLY sc ON c.courseId = sc.scoresCourseId
+GROUP BY
+    c.courseId, c.courseName
+ORDER BY
+    studentCount ASC;
+
+
+
+
+
+
+
+-- SOLUTION FOR QUESTION 6
+-- Get the course with the most amount of students
+SELECT TOP 1
+    courseId,
+    courseName,
+    COUNT(DISTINCT sc.scoresStudentId) AS studentCount
+FROM
+    TESA_JB_COURSE_SCHOOLY c
+JOIN
+    TESA_JB_SCORES_SCHOOLY sc ON c.courseId = sc.scoresCourseId
+GROUP BY courseId, courseName
+ORDER BY
+    studentCount DESC;
+
+
+
+-- SOLUTION FOR QUESTION 7
+-- Number of courses offered by each university.
+SELECT
+    u.universityId,
+    u.universityName,
+    COUNT(c.courseId) AS courseCount
+FROM
+    TESA_JB_UNIVERSITY_SCHOOLY u
+LEFT JOIN
+    TESA_JB_COURSE_SCHOOLY c ON u.universityId = c.courseUniversityId
+GROUP BY
+    u.universityId, u.universityName
+ORDER BY
+    courseCount DESC
+
