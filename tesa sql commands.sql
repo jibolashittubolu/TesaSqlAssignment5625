@@ -41,6 +41,7 @@ CREATE TABLE TESA_JB_ROOM_SCHOOLY (
 );
 -- DROP TABLE  TESA_JB_ROOM_SCHOOLY;
 
+
 -- 3. Course Table
 CREATE SEQUENCE dbo.courseIdSeq
     START WITH 1
@@ -362,6 +363,7 @@ JOIN TESA_JB_COURSE_SCHOOLY as cs
 ON us.universityId = cs.courseUniversityId
 GROUP BY universityId, universityName
 ORDER BY totalCourses DESC ;
+
 
 
 
