@@ -130,6 +130,7 @@ CREATE TABLE TESA_JB_MATERIAL_SCHOOLY (
 );
 -- DROP TABLE  TESA_JB_MATERIAL_SCHOOLY;
 
+
 -- 8. Submission Table
 CREATE SEQUENCE dbo.submissionIdSeq
     START WITH 1
@@ -363,6 +364,7 @@ JOIN TESA_JB_COURSE_SCHOOLY as cs
 ON us.universityId = cs.courseUniversityId
 GROUP BY universityId, universityName
 ORDER BY totalCourses DESC ;
+
 
 
 
