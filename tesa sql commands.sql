@@ -114,6 +114,7 @@ CREATE TABLE TESA_JB_SCORES_SCHOOLY (
 );
 -- DROP TABLE  TESA_JB_SCORES_SCHOOLY;
 
+
 -- 7. Material Table
 CREATE SEQUENCE dbo.materialIdSeq
     START WITH 1
@@ -365,6 +366,7 @@ JOIN TESA_JB_COURSE_SCHOOLY as cs
 ON us.universityId = cs.courseUniversityId
 GROUP BY universityId, universityName
 ORDER BY totalCourses DESC ;
+
 
 
 
