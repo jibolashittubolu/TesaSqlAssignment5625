@@ -78,6 +78,7 @@ CREATE TABLE TESA_JB_STUDENT_SCHOOLY (
 );
 -- DROP TABLE  TESA_JB_STUDENT_SCHOOLY;
 
+
 -- 5. Assignment Table
 CREATE SEQUENCE dbo.assignmentIdSeq
     START WITH 1
@@ -366,6 +367,7 @@ JOIN TESA_JB_COURSE_SCHOOLY as cs
 ON us.universityId = cs.courseUniversityId
 GROUP BY universityId, universityName
 ORDER BY totalCourses DESC ;
+
 
 
 
